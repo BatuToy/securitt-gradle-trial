@@ -7,6 +7,8 @@ build/
 
 application-dev-env.properties
 tri-auth-context-servlet.yaml
+gradle.properties
+compose.yaml
 
 ### STS ###
 .apt_generated
