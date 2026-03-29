@@ -1,0 +1,94 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+      http://www.liquibase.org/xml/ns/dbchangelog-ext
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1773648934185-1" author="batu (generated)">
+        <createTable tableName="tri_user" schemaName="TRI">
+            <column name="id" type="java.lang.Long">
+                <constraints primaryKey="true" primaryKeyName="pk_tri_user_id"/>
+            </column>
+            <column name="user_name" type="java.lang.String"/>
+            <column name="password" type="java.lang.String"/>
+            <column name="version" type="java.lang.String"/>
+            <column name="created_at" type="java.util.Date"/>
+            <column name="created_by" type="java.lang.String"/>
+            <column name="modified_at" type="java.util.Date"/>
+            <column name="modified_by" type="java.lang.String"/>
+            <column name="name" type="java.lang.String"/>
+            <column name="sir_name" type="java.lang.String"/>
+            <column name="phone_number" type="java.lang.String"/>
+            <column name="identification_number" type="java.lang.String">
+                <constraints unique="true" uniqueConstraintName="uk_tri_user_identification_number"/>
+            </column>
+            <column name="email" type="java.lang.String">
+                <constraints unique="true" uniqueConstraintName="uk_tri_user_mail"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1773652001614-1" author="batu (generated)">
+        <createTable tableName="tri_role" schemaName="TRI">
+            <column name="id" type="java.lang.Long">
+                <constraints primaryKey="true" primaryKeyName="pk_tri_role_id"/>
+            </column>
+            <column name="version" type="java.lang.String"/>
+            <column name="created_at" type="java.util.Date"/>
+            <column name="created_by" type="java.lang.String"/>
+            <column name="modified_at" type="java.util.Date"/>
+            <column name="modified_by" type="java.lang.String"/>
+            <column name="name" type="java.lang.String"/>
+            <column name="code" type="java.lang.String">
+                <constraints unique="true" uniqueConstraintName="uk_tri_role_code"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1773680158895-1" author="batu (generated)">
+        <createTable tableName="tri_authority" schemaName="TRI">
+            <column name="id" type="java.lang.Long">
+                <constraints primaryKey="true" primaryKeyName="pk_tri_authority_id"/>
+            </column>
+            <column name="version" type="java.lang.String"/>
+            <column name="created_at" type="java.util.Date"/>
+            <column name="created_by" type="java.lang.String"/>
+            <column name="modified_at" type="java.util.Date"/>
+            <column name="modified_by" type="java.lang.String"/>
+            <column name="role_id" type="java.lang.Long"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1774802203405-1" author="batu (generated)">
+        <addForeignKeyConstraint baseTableName="tri_authority"
+                                 baseColumnNames="role_id"
+                                 constraintName="fk_tri_authority_role_id"
+                                 referencedTableName="tri_role"
+                                 referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="1773652292990-1" author="batu (generated)">
+        <createTable tableName="tri_user_role" schemaName="TRI">
+            <column name="user_id" type="java.lang.Long"/>
+            <column name="role_id" type="java.lang.Long"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1774802012347-1" author="batu (generated)">
+        <addForeignKeyConstraint baseTableName="tri_user_role"
+                                 baseColumnNames="user_id"
+                                 constraintName="fk_tri_user_role_user_id"
+                                 referencedTableName="tri_user"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="tri_user_role"
+                                 baseColumnNames="role_id"
+                                 constraintName="fk_tri_user_role_role_id"
+                                 referencedTableName="tri_role"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,19 @@
+version: '4.0'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: my_database_container
+    hostname: my_database_container
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - APP_USER=myuser
+      - APP_DB=mydatabase
+      - APP_PASSWORD=secret
+      - APP_SCHEMA=tri
+    volumes:
+      - ./scripts/postgres_init:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
