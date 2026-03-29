@@ -2,12 +2,12 @@ HELP.md
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
+!gradle.properties
 !**/src/main/**/build/
 !**/src/test/**/build/
 
 application-dev-env.properties
 tri-auth-context-servlet.yaml
-gradle.properties
 compose.yaml
 
 ### STS ###
