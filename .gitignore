@@ -9,6 +9,7 @@ application-dev-env.properties
 application-liquibase.yaml
 application-db.yaml
 tri-auth-context-servlet.yaml
+banner.txt
 gradle.properties
 compose.yaml
 

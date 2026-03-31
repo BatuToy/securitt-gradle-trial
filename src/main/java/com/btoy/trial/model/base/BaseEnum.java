@@ -6,7 +6,7 @@ package com.btoy.trial.model.base;
  */
 public interface BaseEnum<T> {
 
-    Integer getCode();
+    Integer getDbValue();
 
     String getLabel();
 

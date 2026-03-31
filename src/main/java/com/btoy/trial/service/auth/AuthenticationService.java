@@ -1,14 +1,15 @@
 package com.btoy.trial.service.auth;
 
-import com.btoy.trial.model.security.UserPageableModel;
+import com.btoy.trial.model.security.UserModel;
+import jakarta.validation.Valid;
 import org.springframework.validation.annotation.Validated;
 
 @Validated
 public interface AuthenticationService {
 
-    void logIn(UserPageableModel authenticationModel);
+    void logIn(@Valid UserModel authenticationModel);
 
-    UserPageableModel register(UserPageableModel authenticationModel);
+    UserModel register(@Valid UserModel authenticationModel);
 
     void logout();
 

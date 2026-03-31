@@ -20,6 +20,7 @@ import static com.btoy.trial.constants.Persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+//@SQLDelete(sql = "UPDATE tri.tri_authority AS t SET t.is_active=false WHERE t.id=?1")
 @Entity(name = Authority.AUTHORITY_ENTITY)
 @Table(name = Authority.AUTHORITY_TABLE, schema = APP_SCHEMA,
         uniqueConstraints = {

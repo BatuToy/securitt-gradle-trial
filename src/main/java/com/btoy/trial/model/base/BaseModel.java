@@ -1,12 +1,11 @@
 package com.btoy.trial.model.base;
 
 /*
- * @created 28/03/2026 ~~ 23:39
+ * @created 31/03/2026 ~~ 19:55
  * author: batu
  */
-interface BaseModel<I> {
-
-    Integer getVersion();
+public interface BaseModel<I> {
 
     I getId();
+
 }

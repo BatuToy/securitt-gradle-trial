@@ -1,15 +1,16 @@
 package com.btoy.trial.service.auth;
 
-import com.btoy.trial.model.security.UserPageableModel;
+import com.btoy.trial.model.security.UserModel;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Transactional
 @Service
+@Transactional
 public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
-    public void logIn(UserPageableModel authenticationModel) {
+    public void logIn(UserModel authenticationModel) {
     }
 
     @Override
@@ -18,7 +19,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public UserPageableModel register(UserPageableModel authenticationModel) {
+    public UserModel register(UserModel authenticationModel) {
         return null;
     }
 }

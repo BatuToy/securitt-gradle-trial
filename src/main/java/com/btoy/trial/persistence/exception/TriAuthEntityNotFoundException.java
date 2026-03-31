@@ -1,19 +1,26 @@
 package com.btoy.trial.persistence.exception;
 
-public class TriAuthEntityNotFoundException extends RuntimeException {
+import java.util.Map;
+
+public class TriAuthEntityNotFoundException extends BaseException {
+
+    public TriAuthEntityNotFoundException(Throwable cause, Map<String, ?> params) {
+        super(cause, params);
+    }
+
+    public TriAuthEntityNotFoundException(String message, Throwable cause, Map<String, ?> params) {
+        super(message, cause, params);
+    }
+
+    public TriAuthEntityNotFoundException(String message, Map<String, ?> params) {
+        super(message, params);
+    }
+
+    public TriAuthEntityNotFoundException(Map<String, ?> params) {
+        super(params);
+    }
 
     public TriAuthEntityNotFoundException() {
-    }
-
-    public TriAuthEntityNotFoundException(String message) {
-        super(message);
-    }
-
-    public TriAuthEntityNotFoundException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public TriAuthEntityNotFoundException(Throwable cause) {
-        super(cause);
+        super();
     }
 }

@@ -1,32 +1,19 @@
 spring:
   application:
     name: ${APP_NAME:TRI-AUTH-DEV-APP}
+    version: ${APP_VERSION:0.0.2}
+
+  main:
+    banner-mode: console
+
   config:
-    import: { "classpath:application-dev-env.properties" }
-  datasource:
-    password: ${DB_PASSWORD:secret}
-    username: ${DB_USERNAME:myuser}
-    url: ${DB_URL:jdbc:postgresql://[::1]:5432/mydatabase?currentSchema=tri&user=myuser&password=${DB_PASSWORD:secret}}
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    hibernate:
-      ddl-auto: ${HIBERNATE_DDL:none}
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-  liquibase:
-    url: ${DB_URL:jdbc:postgresql://[::1]:5432/mydatabase?currentSchema=tri&user=myuser&password=${DB_PASSWORD:secret}}
-    change-log: ${LIQUIBASE_MASTER_FILE_PATH:classpath:db/changelog/changelog-master.xml}
-    default-schema: ${LIQUIBASE_SCHEMA:TRI}
-    liquibase-schema: ${LIQUIBASE_SCHEMA:TRI}
-    enabled: ${LIQUIBASE_ENABLED:true}
-    database-change-log-table: ${LIQUIBASE_DATABASE_CHANGELOG_TABLE:DATABASECHANGELOG}
-    database-change-log-lock-table: ${LIQUIBASE_DATABASE_CHANGELOG_LOCK_TABLE:DATABASECHANGELOGLOCK}
-    analytics-enabled: ${LIQUIBASE_ANALYTICS_ENABLED:true}
-    show-summary-output: log
-    user: ${LIQUIBASE_USER:myuser}
+    import:
+      - optional:classpath:application-dev-env.properties
+      - optional:classpath:application-liquibase.yaml
+      - optional:classpath:application-db.yaml
 
 server:
   servlet:
     context-path: ${CONTEXT_PATH_PREFIX:/tri-auth-dev-api/v1}
+
 

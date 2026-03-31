@@ -19,6 +19,8 @@ java {
 jar {
     manifest {
         attributes 'Main-Class': 'com.btoy.trial.TrialApplication'
+        attributes 'Implementation-Version': project.version
+
     }
 }
 

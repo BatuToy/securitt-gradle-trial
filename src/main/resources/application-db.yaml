@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    password: ${DB_PASSWORD:secret}
+    username: ${DB_USERNAME:myuser}
+    url: ${DB_URL:jdbc:postgresql://[::1]:5432/mydatabase?currentSchema=tri&user=myuser&password=${DB_PASSWORD:secret}}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: ${HIBERNATE_DDL:none}
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect

@@ -36,12 +36,12 @@ public class JwtTokenProvider {
 
     public static boolean isTokenVerified(String token) {
         try {
-            Jwts.parser().verifyWith(KEY).build().parseSignedClaims(token).getPayload();
+            Jwts.parser().verifyWith(KEY).build().parseSignedClaims(token);
+            return true;
         } catch (IllegalArgumentException | JwtException exception) {
             LOGGER.severe(Arrays.toString(exception.getStackTrace()));
             return false;
         }
-        return true;
     }
 
     private static Map<String, Object> prepareClaims(UserDetails user) {

@@ -1,6 +1,6 @@
 package com.btoy.trial.service.user;
 
-import com.btoy.trial.model.security.UserPageableModel;
+import com.btoy.trial.model.security.UserModel;
 
 /*
  * @created 25/03/2026 ~~ 17:47
@@ -10,7 +10,7 @@ public interface UserService {
 
     void save();
 
-    UserPageableModel getById();
+    UserModel getById();
 
     void update();
 }

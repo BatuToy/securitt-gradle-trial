@@ -5,7 +5,7 @@ package com.btoy.trial.model.security;
  * author: batu
  */
 
-import com.btoy.trial.model.base.TriAuthAbstractPageableModel;
+import com.btoy.trial.model.base.TriAuthAbstractPageableVersionedModel;
 import lombok.*;
 
 @AllArgsConstructor
@@ -13,7 +13,7 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class AuthorityModel extends TriAuthAbstractPageableModel<Long> {
+public class AuthorityModel extends TriAuthAbstractPageableVersionedModel<Long> {
 
     private String name;
 

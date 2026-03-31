@@ -1,6 +1,7 @@
 package com.btoy.trial.model.base;
 
 import jakarta.persistence.MappedSuperclass;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,8 +12,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@MappedSuperclass
-public class TriAuthAbstractPageableModel<I> extends TriAuthAbstractModel<I>  {
+public abstract class TriAuthAbstractPageableVersionedModel<I> extends TriAuthAbstractVersionedModel<I> {
 
     private String direction;
 

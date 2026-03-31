@@ -20,8 +20,12 @@ public final class AuthenticationUtils {
         //protected from initialization
     }
 
-    private static SecurityContext getContext() {
+    public static SecurityContext getContext() {
         return SecurityContextHolder.getContext();
+    }
+
+    public static void setAuthenticationToContext(Authentication authentication) {
+        getContext().setAuthentication(authentication);
     }
 
     public static Optional<Authentication> getAuthentication() {

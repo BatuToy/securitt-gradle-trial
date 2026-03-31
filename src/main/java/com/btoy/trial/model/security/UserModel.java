@@ -5,7 +5,7 @@ package com.btoy.trial.model.security;
  * author: batu
  */
 
-import com.btoy.trial.model.base.TriAuthAbstractPageableModel;
+import com.btoy.trial.model.base.TriAuthAbstractPageableVersionedModel;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -18,7 +18,7 @@ import static jakarta.validation.constraints.Pattern.*;
 @Getter
 @Setter
 @Builder
-public class UserPageableModel extends TriAuthAbstractPageableModel<Long> {
+public class UserModel extends TriAuthAbstractPageableVersionedModel<Long> {
 
     @NotEmpty
     @NotNull
