@@ -10,4 +10,4 @@ spring:
     analytics-enabled: ${LIQUIBASE_ANALYTICS_ENABLED:true}
     show-summary-output: log
     user: ${LIQUIBASE_USER:myuser}
-    clear-checksums: false
+    clear-checksums: ${CLEAR_CHECKSUMS:false}
