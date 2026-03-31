@@ -6,6 +6,8 @@ build/
 !**/src/test/**/build/
 
 application-dev-env.properties
+application-liquibase.yaml
+application-db.yaml
 tri-auth-context-servlet.yaml
 gradle.properties
 compose.yaml
