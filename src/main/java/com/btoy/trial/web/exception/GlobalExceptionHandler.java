@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import static com.btoy.trial.web.security.util.ObjectUtils.fromStackTrace;
+import static org.springframework.http.HttpStatus.FORBIDDEN;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -46,7 +48,7 @@ public class GlobalExceptionHandler {
         return AppResponse.of(exception.getStackTrace(),
                 exception.getMessage(),
                 exception.getParams(),
-                HttpStatus.UNAUTHORIZED.value());
+                UNAUTHORIZED.value());
     }
 
     @ExceptionHandler(exception =  AccessDeniedException.class, produces = PRODUCE_MEDIA_TYPE)
@@ -55,6 +57,6 @@ public class GlobalExceptionHandler {
         return AppResponse.of(exception.getStackTrace(),
                 exception.getMessage(),
                 exception.getParams(),
-                HttpStatus.FORBIDDEN.value());
+                FORBIDDEN.value());
     }
 }

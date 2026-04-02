@@ -22,7 +22,7 @@ public class PersistenceException extends BaseException {
     }
 
     public PersistenceException(String message, Throwable cause, Map<String, ?> params) {
-        super(message, cause, params);
+        super(message, params, cause);
     }
 
     public PersistenceException(Throwable cause, Map<String, ?> params) {

@@ -10,32 +10,34 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 
-public class BaseException extends RuntimeException{
+import static com.btoy.trial.web.security.util.ObjectUtils.*;
+import static com.btoy.trial.web.security.util.ObjectUtils.isMapNullOrEmpty;
+
+public class BaseException extends RuntimeException implements ParametricException {
 
     private static final String M_PARAM_VALUES_NOT_NULL = "Exception Parameters Can Not Be Null";
     private static final String M_MESSAGE_NOT_BLANK_OR_NULL = "Provided Exception Message Can Not Be Null Or Blank";
 
-    private final transient Map<String, ?> params;
+    private final transient Map<?, ?> params;
 
     public BaseException() {
         this.params = Collections.emptyMap();
     }
 
-    public BaseException(Map<String, ?> params) {
+    public BaseException(Map<?, ?> params) {
         super();
         this.params = params;
     }
 
-    public BaseException(String message, Map<String, ?> params) {
-        String formattedMessage = formatMessage(message, params.values());
-        super(formattedMessage);
+    public BaseException(String message, Map<?, ?> params) {
+        super(isParamsProvided(params) ? formatMessage(message, params.values()) : message);
         this.params = params;
     }
 
-    public BaseException(String message, Throwable cause, Map<String, ?> params) {
-        String formattedMessage = formatMessage(message, params.values());
-        super(formattedMessage, cause);
-        this.params = params;
+    public BaseException(String message, Map<?, ?> params, Throwable cause) {
+        final String msg = isParamsProvided(params) ? formatMessage(message, params.values()): message;
+        super(msg, cause);
+        this.params = nvlMap(params);
     }
 
     public BaseException(Throwable cause, Map<String, ?> params) {
@@ -44,7 +46,7 @@ public class BaseException extends RuntimeException{
     }
 
     private static String formatMessage(String message, Collection<?> paramValues) {
-        if (StringUtils.hasText(message)) {
+        if (!StringUtils.hasText(message)) {
             Log.LOGGER.severe(M_MESSAGE_NOT_BLANK_OR_NULL);
             throw new IllegalArgumentException(M_MESSAGE_NOT_BLANK_OR_NULL);
         }
@@ -53,8 +55,13 @@ public class BaseException extends RuntimeException{
     }
 
     // Protect Params from outsider's.
-    public Map<String, ?> getParams() {
+    public Map<?, ?> getParams() {
         return Collections.unmodifiableMap(this.params);
+    }
+
+    @Override
+    public Boolean hasAnyParam() {
+        return isParamsProvided(params);
     }
 
     public <T> AppResponse<T> toAppResponse(Integer code) {
@@ -63,5 +70,9 @@ public class BaseException extends RuntimeException{
 
     public <T> AppResponse<T> toAppResponse() {
         return AppResponse.of(super.getStackTrace(), super.getMessage(), getParams(), null);
+    }
+
+    private static boolean isParamsProvided(Map<?, ?> params) {
+        return !isMapNullOrEmpty(params);
     }
 }
