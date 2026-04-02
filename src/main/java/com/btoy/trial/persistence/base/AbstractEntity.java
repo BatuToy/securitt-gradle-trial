@@ -1,9 +1,12 @@
 package com.btoy.trial.persistence.base;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -15,7 +18,10 @@ import static com.btoy.trial.constants.Persistence.COL_IS_ACTIVE;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @MappedSuperclass
+@SuperBuilder
 public abstract class AbstractEntity<I> implements DeActivable {
 
     public static final String CREATED_BY = "CREATED_BY";

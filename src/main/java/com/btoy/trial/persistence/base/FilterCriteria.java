@@ -28,7 +28,7 @@ public class FilterCriteria {
         }
 
         @Override
-        public Integer getDbValue() {
+        public Integer toDbValue() {
             return this.code;
         }
 

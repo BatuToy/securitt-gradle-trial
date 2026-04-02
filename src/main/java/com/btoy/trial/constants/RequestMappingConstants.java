@@ -1,8 +1,5 @@
 package com.btoy.trial.constants;
 
-
-import org.springframework.data.domain.Sort;
-
 /*
  * @created 15/03/2026 ~~ 17:29
  * author: batu

@@ -18,4 +18,6 @@ public class AuthorityModel extends TriAuthAbstractPageableVersionedModel<Long> 
     private String name;
 
     private String code;
+
+    private String roleId;
 }

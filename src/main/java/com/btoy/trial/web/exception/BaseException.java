@@ -1,4 +1,4 @@
-package com.btoy.trial.persistence.exception;
+package com.btoy.trial.web.exception;
 
 
 import com.btoy.trial.constants.Log;
@@ -57,7 +57,11 @@ public class BaseException extends RuntimeException{
         return Collections.unmodifiableMap(this.params);
     }
 
+    public <T> AppResponse<T> toAppResponse(Integer code) {
+        return AppResponse.of(super.getStackTrace(), super.getMessage(), getParams(), code);
+    }
+
     public <T> AppResponse<T> toAppResponse() {
-        return AppResponse.of(super.getStackTrace(), super.getMessage(), getParams());
+        return AppResponse.of(super.getStackTrace(), super.getMessage(), getParams(), null);
     }
 }

@@ -6,7 +6,6 @@ package com.btoy.trial.model.security;
  */
 
 import com.btoy.trial.model.base.TriAuthAbstractModel;
-import com.btoy.trial.model.base.TriAuthAbstractVersionedModel;
 import lombok.*;
 
 import java.util.List;

@@ -1,14 +1,10 @@
 package com.btoy.trial.persistence.entity.authority;
 
-import com.btoy.trial.constants.ApplicationConstants;
 import com.btoy.trial.persistence.base.AbstractVersionedEntity;
-import com.btoy.trial.persistence.base.DeActivable;
 import com.btoy.trial.persistence.entity.role.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -18,11 +14,13 @@ import static com.btoy.trial.constants.Persistence.*;
 
 @Getter
 @Setter
+//@SQLDelete(sql = "UPDATE tri.tri_authority AS t SET t.is_active=false WHERE t.id=?1")
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-//@SQLDelete(sql = "UPDATE tri.tri_authority AS t SET t.is_active=false WHERE t.id=?1")
 @Entity(name = Authority.AUTHORITY_ENTITY)
-@Table(name = Authority.AUTHORITY_TABLE, schema = APP_SCHEMA,
+@Table(name = Authority.AUTHORITY_TABLE,
+        schema = APP_SCHEMA,
         uniqueConstraints = {
                 @UniqueConstraint(name = Authority.UK_AUTHORITY_CODE, columnNames = Authority.COL_CODE)
         }
@@ -51,10 +49,10 @@ public class Authority extends AbstractVersionedEntity<Long> {
     @JoinColumn(name = COL_ROLE,
             referencedColumnName = COL_ID,
             foreignKey = @ForeignKey(
-                    name = FK_AUTHORITY_ROLE,
-                    value = ConstraintMode.CONSTRAINT
+                    name = FK_AUTHORITY_ROLE
             )
     )
     @Fetch(FetchMode.SELECT)
     private Role role;
+
 }

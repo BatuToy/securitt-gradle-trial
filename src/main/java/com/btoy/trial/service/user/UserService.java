@@ -8,9 +8,9 @@ import com.btoy.trial.model.security.UserModel;
  */
 public interface UserService {
 
-    void save();
+    void save(UserModel userModel);
 
-    UserModel getById();
+    UserModel getById(Long id);
 
-    void update();
+    void update(UserModel userModel);
 }

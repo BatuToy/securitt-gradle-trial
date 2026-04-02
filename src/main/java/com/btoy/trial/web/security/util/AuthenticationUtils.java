@@ -17,14 +17,14 @@ import java.util.Optional;
 public final class AuthenticationUtils {
 
     private AuthenticationUtils() {
-        //protected from initialization
+        throw new UnsupportedOperationException();
     }
 
     public static SecurityContext getContext() {
         return SecurityContextHolder.getContext();
     }
 
-    public static void setAuthenticationToContext(Authentication authentication) {
+    public static void setAuthenticationInContext(Authentication authentication) {
         getContext().setAuthentication(authentication);
     }
 

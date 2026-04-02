@@ -1,7 +1,7 @@
 package com.btoy.trial.service.auth;
 
 import com.btoy.trial.model.security.UserModel;
-import jakarta.validation.Valid;
+import com.btoy.trial.service.user.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,8 +9,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class AuthenticationServiceImpl implements AuthenticationService {
 
+    private final UserService userService;
+
+    public AuthenticationServiceImpl(UserService userService) {
+        this.userService = userService;
+    }
+
     @Override
     public void logIn(UserModel authenticationModel) {
+
     }
 
     @Override

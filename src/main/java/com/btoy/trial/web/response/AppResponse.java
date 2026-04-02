@@ -1,9 +1,7 @@
 package com.btoy.trial.web.response;
 
-import com.btoy.trial.persistence.exception.BaseException;
 import jakarta.annotation.Nullable;
 import org.springframework.http.HttpStatus;
-import org.springframework.util.CollectionUtils;
 
 import java.util.Collections;
 import java.util.Map;
@@ -19,39 +17,44 @@ public class AppResponse<T> {
     private final String message;
     private final T data;
 
-    private Map<String, ?> params;
+    private final Map<?, ?> params;
     private final ErrorResponse error;
 
-    public AppResponse(T data, String message, Integer code) {
+    public AppResponse(T data, String message, Integer code, Map<?, ?> params) {
         this.data = data;
         this.message = message;
         this.code = code;
         this.error = null;
+        this.params = handleParams(params);
     }
 
-    public AppResponse(StackTraceElement[] trace, String message, Map<String, ?> params, Integer code) {
-        this.code = Objects.equals(code, EMPTY_CODE) ? DEFAULT_ERROR_CODE.value() : code;
+    public AppResponse(StackTraceElement[] trace, String message, Map<?, ?> params, Integer code) {
+        this.code = code;
         this.error = ErrorResponse.of(trace);
         this.message = message;
-        this.params = params;
         this.data = null;
+        this.params = handleParams(params);
     }
 
-    public AppResponse(Integer code, String message) {
+    public AppResponse(Integer code, String message, Map<?, ?> params) {
         this.code = code;
         this.message = message;
         this.data = null;
         this.error = null;
+        this.params = handleParams(params);
+
     }
 
-    public AppResponse(String message) {
+    public AppResponse(String message, Map<?, ?> params) {
         this.code = DEFAULT_SUCCESS_CODE.value();
         this.message = message;
         this.data = null;
         this.error = null;
+        this.params = handleParams(params);
     }
 
-    public AppResponse(T data, String message) {
+    public AppResponse(T data, String message, Map<?, ?> params) {
+        this.params = handleParams(params);
         this.code = DEFAULT_SUCCESS_CODE.value();
         this.data = data;
         this.message = message;
@@ -59,19 +62,24 @@ public class AppResponse<T> {
     }
 
     public static <T> AppResponse<T> of(T data, String message, Integer code) {
-        return new AppResponse<>(data, message, code);
+        return new AppResponse<>(data, message, code, Map.of());
     }
 
     public static <T> AppResponse<T> of(T data, String message) {
-        return new AppResponse<>(data, message);
+        return new AppResponse<>(data, message, Map.of());
     }
 
     public static <T> AppResponse<T> of(String message) {
-        return new AppResponse<>(message);
+        return new AppResponse<>(message, Map.of());
     }
 
-    public static <T> AppResponse<T> of(StackTraceElement[] traceLog, String message, Map<String, ?> params) {
-        return new AppResponse<>(traceLog, message, params, EMPTY_CODE);
+    public static <T> AppResponse<T> of(StackTraceElement[] traceLog, String message, Map<?, ?> params, @Nullable Integer code) {
+        HttpStatus status = Objects.isNull(code) ? DEFAULT_ERROR_CODE : HttpStatus.valueOf(code);
+        return new AppResponse<>(traceLog, message, params, status.value());
+    }
+
+    private static Map<?, ?> handleParams(Map<?, ?> params) {
+        return (params == null || params.isEmpty()) ? Collections.emptyMap() : params;
     }
 
     public int getCode() {
@@ -91,7 +99,7 @@ public class AppResponse<T> {
     }
 
     // Protected from outside.
-    public Map<String, ?> getParams() {
+    public Map<?, ?> getParams() {
         return Collections.unmodifiableMap(this.params);
     }
 }

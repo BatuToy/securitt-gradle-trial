@@ -1,7 +1,5 @@
 package com.btoy.trial.model.base;
 
-import jakarta.persistence.MappedSuperclass;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 

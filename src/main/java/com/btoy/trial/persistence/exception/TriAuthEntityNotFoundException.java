@@ -1,8 +1,10 @@
 package com.btoy.trial.persistence.exception;
 
+import com.btoy.trial.web.exception.BaseException;
+
 import java.util.Map;
 
-public class TriAuthEntityNotFoundException extends BaseException {
+public class TriAuthEntityNotFoundException extends PersistenceException {
 
     public TriAuthEntityNotFoundException(Throwable cause, Map<String, ?> params) {
         super(cause, params);

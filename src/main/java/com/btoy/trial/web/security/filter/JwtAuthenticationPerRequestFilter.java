@@ -17,13 +17,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -50,14 +46,14 @@ public class JwtAuthenticationPerRequestFilter extends OncePerRequestFilter {
             }
             UserDetails details = userDetailsService.loadUserByUsername(subject);
             CustomUserDetails customUserDetails = CastUtils.cast(CustomUserDetails.class, details);
-            if (!AuthenticationUtils.isAuthenticated() && AuthenticationUtils.getAuthentication().isEmpty()) {
+            if (!AuthenticationUtils.isAuthenticated()) {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         customUserDetails.getUsername(),
                         customUserDetails.getPassword(),
                         customUserDetails.getAuthorities()
                 );
                 authentication.setDetails(new WebAuthenticationDetails(request));
-                AuthenticationUtils.setAuthenticationToContext(authentication);
+                AuthenticationUtils.setAuthenticationInContext(authentication);
             }
             filterChain.doFilter(request, response);
         } catch (JwtException e) {

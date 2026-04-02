@@ -5,8 +5,6 @@ package com.btoy.trial.web.response;
  * author: batu
  */
 
-import com.btoy.trial.persistence.exception.BaseException;
-
 import java.util.Arrays;
 
 public class ErrorResponse {
@@ -19,5 +17,9 @@ public class ErrorResponse {
 
     public static ErrorResponse of(StackTraceElement[] stackTraceElements) {
         return new ErrorResponse(stackTraceElements);
+    }
+
+    public String getStackTrace() {
+        return stackTrace;
     }
 }

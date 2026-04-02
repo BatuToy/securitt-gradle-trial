@@ -4,6 +4,7 @@ import com.btoy.trial.persistence.base.AbstractVersionedEntity;
 import com.btoy.trial.persistence.entity.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ import static com.btoy.trial.persistence.entity.user.User.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 @Entity(name = ENTITY_USER)
 @Table(uniqueConstraints = {
         @UniqueConstraint(name = UNIQUE_EMAIL, columnNames = COL_EMAIL),
